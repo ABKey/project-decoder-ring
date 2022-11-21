@@ -3,11 +3,30 @@
 // Only add code (helper methods, variables, etc.) within the scope
 // of the anonymous function on line 6
 
+// letters to numbers 97 - 122
 const caesarModule = (function () {
-  // you can add any code you want within this function scope
 
   function caesar(input, shift, encode = true) {
-    // your solution code here
+
+    let fullMessage = "";
+
+    if (shift > 25 || shift < -25 || shift === 0) {
+      return false;
+    }
+    for (let i = 0; i < input.length; i++) {
+      let letterValue = input[i].toLowerCase().charCodeAt(0);
+      if (letterValue >= 97 && letterValue <= 122) {
+        letterValue += shift * (encode ? 1 : -1)
+        if (letterValue > 122) {
+            letterValue = letterValue - 26;
+        }
+        if (letterValue < 97) {
+            letterValue = letterValue + 26;
+        }
+      }
+      fullMessage += String.fromCharCode(letterValue);
+    }
+    return fullMessage;
   }
 
   return {
